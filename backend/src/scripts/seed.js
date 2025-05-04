@@ -44,20 +44,64 @@ const Seeder = async function seed() {
     await Zone.bulkCreate(zones);
 
     // 3. Devices
-    const allZones = await Zone.findAll({
-      attributes: ["zone_id"]
-    });
-    const deviceTypes = ["sensor", "actuator"];
-    const devices = Array.from({
-      length: 6
-    }).map((_, i) => ({
-      zone_id: 1, // Đảm bảo zone_id = 1
-      name: `Device ${i + 1}`, // Tạo tên thiết bị (Device 1, Device 2, ...)
-      device_type: i % 2 === 0 ? "sensor" : "actuator", // Luân phiên sensor và actuator
-      status: i % 2 === 0 ? "on" : "off", // Trạng thái luân phiên on và off
-      created_at: faker.date.recent(10), // Thời gian tạo gần đây
-    }));
+    const devices = [{
+        zone_id: 1, // Zone ID = 1
+        device_id: 1, // device_id = 1
+        name: "Temperature Sensor",
+        device_type: "sensor", // Loại thiết bị là sensor
+        status: "on",
+        data_type: "temperature", // data_type = "temperature"
+        created_at: faker.date.recent(10),
+      },
+      {
+        zone_id: 1,
+        device_id: 2,
+        name: "Light Sensor",
+        device_type: "sensor",
+        status: "on",
+        data_type: "luminosity",
+        created_at: faker.date.recent(10),
+      },
+      {
+        zone_id: 1,
+        device_id: 3,
+        name: "Soil Moisture Sensor",
+        device_type: "sensor",
+        status: "on",
+        data_type: "soil_moisture",
+        created_at: faker.date.recent(10),
+      },
+      {
+        zone_id: 1,
+        device_id: 4, // device_id = 4
+        name: "Pump",
+        device_type: "device", // Loại thiết bị là device
+        status: "on",
+        data_type: "pump_status",
+        created_at: faker.date.recent(10),
+      },
+      {
+        zone_id: 1,
+        device_id: 5, // device_id = 5
+        name: "LED Light",
+        device_type: "device",
+        status: "on",
+        data_type: "led_status",
+        created_at: faker.date.recent(10),
+      },
+      {
+        zone_id: 1,
+        device_id: 6,
+        name: "Humidity Sensor",
+        device_type: "sensor",
+        status: "on",
+        data_type: "humidity",
+        created_at: faker.date.recent(10),
+      }
+    ];
+
     await Device.bulkCreate(devices);
+
 
     // 4. Thresholds
     const allDevices = await Device.findAll({
@@ -113,7 +157,7 @@ const Seeder = async function seed() {
     // const selectedDeviceIds = [4, 5]; // Chỉ lấy device_id là 4 và 5
     const controls = selectedDeviceIds.map((device_id) => ({
       device_id: device_id,
-      mode: faker.helpers.arrayElement(["auto"]), // thêm manual
+      mode: faker.helpers.arrayElement(["manual"]), // thêm manual
       status: faker.datatype.boolean() ? "on" : "off",
       updated_by: faker.number.int({
         min: 1,

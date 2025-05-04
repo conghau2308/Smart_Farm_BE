@@ -12,7 +12,7 @@ const toggleLight = async (isLightOn) => {
   try {
     const response = await axios.post(
       apiUrl,
-      { value: isLightOn ? '1' : '0' }, // Gửi giá trị "0" hoặc "100"
+      { value: isLightOn ? '100' : '0' }, // Gửi giá trị "0" hoặc "100"
       {
         headers: {
           'Content-Type': 'application/json',
