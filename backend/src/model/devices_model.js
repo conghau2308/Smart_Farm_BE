@@ -22,6 +22,10 @@ const Device = sequelize.define('Device', {
     type: DataTypesDevice.STRING(100), 
     allowNull: false 
   },
+  data_type: {
+    type: DataTypesDevice.STRING(50),
+    allowNull: false,
+  },
   device_type: { 
     type: DataTypesDevice.STRING(50), 
     allowNull: false 

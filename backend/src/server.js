@@ -10,6 +10,7 @@ const alertRoutes = require("./routes/alert_routes");
 const device_thresholdRoutes = require("./routes/device_threshold_routes");
 const device_controlRoutes = require("./routes/device_control_routes");
 const ledRoutes = require("./routes/led_routes");
+const pumpRoutes = require("./routes/pump_routes");
 const sequelize = require("./config/db");
 require("dotenv").config();
 
@@ -59,6 +60,7 @@ app.use("/alert", alertRoutes);
 app.use("/device_threshold", device_thresholdRoutes);
 app.use("/device-control",device_controlRoutes);
 app.use("/led", ledRoutes);
+app.use("/pump", pumpRoutes);
 routes(app);
 app.listen(port, () => {
   console.log("Server is running on port " + port);
