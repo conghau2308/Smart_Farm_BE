@@ -7,5 +7,6 @@ router.get('/', deviceController.getDevices);
 router.get('/:name', deviceController.getDeviceByName);
 router.put('/:name', deviceController.updateDeviceByName);
 router.delete('/:name', deviceController.deleteDeviceByName);
+router.put('/update/:device_id', deviceController.updateDeviceByDeviceId);
 
 module.exports = router;

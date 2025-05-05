@@ -48,6 +48,27 @@ exports.updateThreshold = async (req, res) => {
   }
 };
 
+// Cập nhật ngưỡng dựa trên device_id
+exports.updateThresholdByDeviceId = async (req, res) => {
+  try {
+    const { device_id } = req.params;
+    const threshold = await DeviceThreshold.findOne({
+      where: { device_id: device_id }
+    });
+
+    if (!threshold) {
+      return res.status(404).json({ error: 'Ngưỡng không tồn tại cho thiết bị này' });
+    }
+
+    await threshold.update(req.body);
+
+    res.json(threshold);
+  } catch (err) {
+    res.status(500).json({ error: 'Không thể cập nhật ngưỡng', details: err.message });
+  }
+};
+
+
 // Xoá ngưỡng
 exports.deleteThreshold = async (req, res) => {
   try {

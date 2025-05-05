@@ -99,19 +99,19 @@ const fetchSensorData = async () => {
               console.log("Gia tri cua lux:", value);
               if (value < maxThreshold) {
                 // Nếu đèn LED đang tắt (giá trị trước là 0), bật đèn
-                if (previousSensorData["led_status"] === '0') {
+                if (previousSensorData["led_status"] === "0") {
                   await toggleLight(true); // Bật đèn
                   console.log("Dền LED đã được bật")
-                  previousSensorData["led_status"] = '1';
+                  previousSensorData["led_status"] = "100";
                 }
               }
               // Khi cảm biến ánh sáng lớn hơn hoặc bằng threshold
               else if (value >= maxThreshold) {
                 // Nếu đèn LED đang bật (giá trị trước là 1), tắt đèn
-                if (previousSensorData["led_status"] === '1') {
+                if (previousSensorData["led_status"] === "100") {
                   await toggleLight(false); // Tắt đèn
                   console.log("Đèn LED đã được tắt");
-                  previousSensorData["led_status"] = '0';
+                  previousSensorData["led_status"] = "0";
                 }
               }
             }

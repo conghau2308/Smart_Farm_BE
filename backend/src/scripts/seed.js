@@ -83,7 +83,7 @@ const Seeder = async function seed() {
       {
         zone_id: 1,
         device_id: 5, // device_id = 5
-        name: "LED Light",
+        name: "Led Light",
         device_type: "device",
         status: "on",
         data_type: "led_status",
@@ -112,16 +112,19 @@ const Seeder = async function seed() {
     const selectedDeviceIds = [4, 5];
     const params = ["temperature", "humidity", "pH", "luminosity"];
     const thresholds = selectedDeviceIds.map((device_id) => {
-      const min = faker.number.float({
+      // Tạo giá trị min và max với 2 chữ số sau dấu thập phân
+      const min = parseFloat(faker.number.float({
         min: 0,
         max: 50,
         precision: 0.1
-      });
-      const max = min + faker.number.float({
+      }).toFixed(2)); // Làm tròn đến 2 chữ số sau dấu thập phân
+
+      const max = parseFloat((min + faker.number.float({
         min: 1,
         max: 50,
         precision: 0.1
-      });
+      })).toFixed(2)); // Làm tròn đến 2 chữ số sau dấu thập phân
+
       return {
         device_id: device_id,
         parameter: faker.helpers.arrayElement(params),
@@ -136,6 +139,7 @@ const Seeder = async function seed() {
     });
 
     await DeviceThreshold.bulkCreate(thresholds);
+
 
 
     // 5. Sensor Readings
