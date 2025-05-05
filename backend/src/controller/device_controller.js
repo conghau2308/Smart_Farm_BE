@@ -3,8 +3,8 @@ const Device = require('../model/devices_model');
 // Tạo thiết bị mới
 exports.createDevice = async (req, res) => {
   try {
-    const { zone_id, name, device_type, status } = req.body;
-    const device = await Device.create({ zone_id, name, device_type, status });
+    const { zone_id, name, data_type, device_type, status } = req.body;
+    const device = await Device.create({ zone_id, name, data_type, device_type, status });
     res.status(201).json(device);
   } catch (err) {
     res.status(500).json({ error: 'Không thể tạo thiết bị', details: err.message });
@@ -50,6 +50,21 @@ exports.updateDeviceByName = async (req, res) => {
     res.status(500).json({ error: 'Không thể cập nhật thiết bị', details: err.message });
   }
 };
+
+// Cập nhật thiết bị theo device_id
+exports.updateDeviceByDeviceId = async (req, res) => {
+  try {
+    console.log("device nhan duoc laf: ", req.params.device_id);
+    const device = await Device.findByPk(req.params.device_id);
+    if (!device) return res.status(404).json({ error: 'Thiết bị không tồn tại' });
+
+    await device.update(req.body);
+    res.json(device);
+  } catch (err) {
+    res.status(500).json({ error: 'Không thể cập nhật thiết bị', details: err.message });
+  }
+};
+
 
 // Xoá thiết bị theo tên
 exports.deleteDeviceByName = async (req, res) => {
