@@ -353,7 +353,7 @@ Grafana giúp theo dõi xu hướng, thiết lập cảnh báo và phân tích d
 
 ## 👨‍💻 Tác giả
 
-**Tên bạn** – [GitHub](https://github.com/your-profile)
+**Võ Công Hậu** – [GitHub](https://github.com/conghau2308)
 
 ---
 
